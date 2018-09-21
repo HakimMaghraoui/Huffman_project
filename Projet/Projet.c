@@ -34,12 +34,15 @@ int main(){
 	add_left(&n,&nl);
 	add_right(&n,&nr);
 	Show_node(&n);
-	//delete_node(&n);
-	printf("%d\n",(*n).val);
-	ptree pt=creat_tree(n);
-	Show_node(&(pt->root));
-	//delete_tree(&pt);
-	symbole_frequency();
+
+	
+	//printf("%d\n",(*n).val);
+	 ptree pt=creat_tree(n);
+	 delete_node(&n);
+	 Show_node(&(pt->root));
+	 //delete_tree(&(pt->root));
+	 //Show_node(&(pt->root));
+	//symbole_frequency();
 
 
 	printf("%s\n","Test Complet" );

@@ -30,7 +30,7 @@ void add_left(pnode * pn1, pnode * pn2){
 	(*pn1)->left=(*pn2);
 }
 
-void delete_node(pnode * pn){//pourquoi ne marche pas avec juste le free?
+void delete_node(pnode * pn){
 	 free(*pn);
 	 (*pn)->right=NULL;
 	 (*pn)->left=NULL;
@@ -38,10 +38,52 @@ void delete_node(pnode * pn){//pourquoi ne marche pas avec juste le free?
 	
 }
 
-void delete_tree(ptree * pt){
-	free(*pt);
-	(*pt)->root=NULL;
-	(*pt)->frequency=0;
+void delete_tree(pnode * pn){//parcourire pour tout suprimer et pas juste la racinepartire de la fin remonter en verifiant si on a des enfants sinon on supprime
+	if ((*pn)!=NULL){
+		delete_tree(&(*pn)->right);
+		delete_tree(&(*pn)->left);
+		free(*pn);
+		(*pn)=NULL;
+	}
+
+
+	// pnode tmp=malloc(sizeof(node));
+	// tmp=(*pt)->root;
+	// if (tmp->right && tmp->left){
+	// 	delete_tree((*pt)->right);
+	// 	delete_tree((*pt)->left);
+	// 	free(*pt);
+	// 	(*pt=NULL);
+	// }
+	// free(tmp);
+	// tmp=NULL;
+
+	
+	//free(*pt);
+// 	pnode tmp=malloc(sizeof(node));
+// 	tmp=(*pt)->root;
+// 	while(tmp!=NULL){
+// 		while(tmp->right!=NULL){
+// 			tmp=tmp->right;
+// 		}
+// 		while(tmp->left!=NULL){
+// 			tmp=tmp->left;
+// 		}
+// 		delete_node(&tmp);
+// }
+
+// tmp=NULL;
+
+	// while(tmp!=NULL){//suprimer tmp on son fils :/
+	// 	if((*tmp)->right!=NULL){
+	// 		tmp=(*tmp)->right;
+	// 	}else if((*tmp)->left!=NULL){
+	// 		tmp=(*tmp)->left;
+	// 	}
+
+	//}
+	// (*pt)->root=NULL;
+	// (*pt)->frequency=0;
 	
 }
 
