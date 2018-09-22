@@ -39,7 +39,7 @@ int main(){
 	//printf("%d\n",(*n).val);
 	 ptree pt=creat_tree(n);
 	 delete_node(&n);
-	 Show_node(&(pt->root));
+	// Show_node(&(pt->root));
 	 //delete_tree(&(pt->root));
 	 //Show_node(&(pt->root));
 	//symbole_frequency();

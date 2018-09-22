@@ -31,10 +31,11 @@ void add_left(pnode * pn1, pnode * pn2){
 }
 
 void delete_node(pnode * pn){
-	 free(*pn);
+	 
 	 (*pn)->right=NULL;
 	 (*pn)->left=NULL;
 	 (*pn)->val=0;
+	 free(*pn);
 	
 }
 
@@ -42,8 +43,9 @@ void delete_tree(pnode * pn){//parcourire pour tout suprimer et pas juste la rac
 	if ((*pn)!=NULL){
 		delete_tree(&(*pn)->right);
 		delete_tree(&(*pn)->left);
-		free(*pn);
+		
 		(*pn)=NULL;
+		free(*pn);
 	}
 
 
