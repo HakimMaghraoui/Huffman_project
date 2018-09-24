@@ -31,7 +31,12 @@ void add_left(pnode * pn1, pnode * pn2){
 }
 
 void delete_node(pnode * pn){
-	 
+	if((*pn)->right!=NULL){
+	 	delete_node(&(*pn)->right);
+	 }
+	 if((*pn)->left!=NULL){
+	 	delete_node(&(*pn)->left);
+	 }
 	 (*pn)->right=NULL;
 	 (*pn)->left=NULL;
 	 (*pn)->val=0;
@@ -47,46 +52,6 @@ void delete_tree(pnode * pn){//parcourire pour tout suprimer et pas juste la rac
 		(*pn)=NULL;
 		free(*pn);
 	}
-
-
-	// pnode tmp=malloc(sizeof(node));
-	// tmp=(*pt)->root;
-	// if (tmp->right && tmp->left){
-	// 	delete_tree((*pt)->right);
-	// 	delete_tree((*pt)->left);
-	// 	free(*pt);
-	// 	(*pt=NULL);
-	// }
-	// free(tmp);
-	// tmp=NULL;
-
-	
-	//free(*pt);
-// 	pnode tmp=malloc(sizeof(node));
-// 	tmp=(*pt)->root;
-// 	while(tmp!=NULL){
-// 		while(tmp->right!=NULL){
-// 			tmp=tmp->right;
-// 		}
-// 		while(tmp->left!=NULL){
-// 			tmp=tmp->left;
-// 		}
-// 		delete_node(&tmp);
-// }
-
-// tmp=NULL;
-
-	// while(tmp!=NULL){//suprimer tmp on son fils :/
-	// 	if((*tmp)->right!=NULL){
-	// 		tmp=(*tmp)->right;
-	// 	}else if((*tmp)->left!=NULL){
-	// 		tmp=(*tmp)->left;
-	// 	}
-
-	//}
-	// (*pt)->root=NULL;
-	// (*pt)->frequency=0;
-	
 }
 
 li symbole_frequency(){
