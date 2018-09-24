@@ -45,7 +45,7 @@ void delete_node(pnode * pn){
 }
 
 void delete_tree(pnode * pn){//parcourire pour tout suprimer et pas juste la racinepartire de la fin remonter en verifiant si on a des enfants sinon on supprime
-	if ((*pn)!=NULL){
+	if ((*pn)!=NULL){			//ici on pourrais simplement appeler delete_node sur la racine de l'arbre avec ducoup un arbre en poarametre
 		delete_tree(&(*pn)->right);
 		delete_tree(&(*pn)->left);
 		
