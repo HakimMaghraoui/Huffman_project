@@ -1,78 +1,95 @@
 #include "Node.h"
+#include <string.h>
 
+li createListe(){
+	li liste;
+	nodeL h;
+	h->val=NULL;
+	h->suivant=NULL;
+	liste->head=h;
+	liste->taille=0;
+	return liste;
+}
 
-void Show_node(pnode * pn){
+void addListe(li liste, info in){
+	nodeL nl;
+	nl->val=in;
+	nl->suivant=NULL;
+	if(liste->taille==0){
+		liste->head=nl;
+		liste->taille++;
+	}else{
+		nodeL tmp=liste->head;
+		while(tmp->suivant!=NULL){
+			tmp=tmp->suivant;
+		}
+		tmp->suivant=nl;
+	}
+}
+
+/*void Show_node(pnode * pn){
 	printf("voici la valeur du noeud: %d\n",(*pn)->val);
 	printf("sont fils droit: %d\n",((*pn)->right)->val);
 	printf("et sont fils gauche: %d\n",((*pn)->left)->val);
-}
+}*/
 
-pnode create_node(int val){
-	pnode res=malloc(sizeof(node));
-	(*res).val=val;
+pnode create_node(info in){
+	pnode res=(pnode)malloc(sizeof(struct node));
+	(*res).in=in;
 	(*res).right=NULL;
 	(*res).left=NULL;
 	return res;
 }
 
-ptree creat_tree(pnode pn){
-	ptree res =malloc(sizeof(tree));
+int frequency(pnode pt){
+	int left=0;
+	int right=0;
+	if(pt->left!=NULL){
+		left=frequency(pt->left);
+	}
+	if(pt->right!=NULL){
+		right=frequency(pt->right);
+	}
+	return left+right+pt->in->frequency;
+}
+
+ptree create_tree(pnode pn){
+	ptree res=(ptree)malloc(sizeof(struct tree));
 	(*res).root=pn;
-	(*res).frequency=pn->val;//mettre ici la fonction de calcule de frequance a la place de 0
+	(*res).frequency=frequency(pn);
 	return res;
 }
 
-void add_right(pnode * pn1, pnode * pn2){
-	(*pn1)->right=(*pn2);
+void add_right(pnode pn1, pnode pn2){
+	(*pn1).right=pn2;
 }
 
-void add_left(pnode * pn1, pnode * pn2){
-	(*pn1)->left=(*pn2);
+void add_left(pnode pn1, pnode pn2){
+	(*pn1).left=pn2;
 }
 
-void delete_node(pnode * pn){
-	if((*pn)->right!=NULL){
-	 	delete_node(&(*pn)->right);
+void delete_info(info in){
+	(*in).frequency=0;
+	(*in).symbole=NULL;
+	free(*in);
+}
+
+void delete_node(pnode pn){
+	if((*pn).right!=NULL){
+	 	delete_node((*pn).right);
 	 }
-	 if((*pn)->left!=NULL){
-	 	delete_node(&(*pn)->left);
+	 if((*pn).left!=NULL){
+	 	delete_node((*pn).left);
 	 }
-	 (*pn)->right=NULL;
-	 (*pn)->left=NULL;
-	 (*pn)->val=0;
+	 (*pn).right=NULL;
+	 (*pn).left=NULL;
+	 delete_info((*pn).in);
 	 free(*pn);
-	
 }
 
-void delete_tree(pnode * pn){//parcourire pour tout suprimer et pas juste la racinepartire de la fin remonter en verifiant si on a des enfants sinon on supprime
-	if ((*pn)!=NULL){			//ici on pourrais simplement appeler delete_node sur la racine de l'arbre avec ducoup un arbre en poarametre
-		delete_tree(&(*pn)->right);
-		delete_tree(&(*pn)->left);
-		
-		(*pn)=NULL;
-		free(*pn);
-	}
+void delete_tree(ptree pt){
+	delete_node((*pt).root);
+	(*pt).frequency=0;
+	free(*pt);
 }
 
-void delete_tree2(ptree * pt){
-	if((*pt)->root!=NULL){
-		delete_node(&(*pt)->root);
-	}else{
-		printf("%s\n","arbre deja vide");
-	}
-}
-
-li symbole_frequency(){
-	return NULL;
-}
-
-ptree fusion(ptree pt1, ptree pt2){
-	pnode tmp_pn1=(*pt1).root;
-	pnode tmp_pn2=(*pt2).root;
-	int val_fusion=((*tmp_pn1).val)+((*tmp_pn2).val);
-	pnode n_fusion=create_node(val_fusion);
-	add_left(&n_fusion,&tmp_pn1);
-	add_right(&n_fusion,&tmp_pn2);
-	ptree t_fusion=creat_tree(n_fusion);
-	return t_fusion;
-}
