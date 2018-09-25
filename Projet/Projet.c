@@ -26,19 +26,26 @@ int main(){
 	// Show_node(&n);
 
 	pnode n=create_node(18);
-	//printf("%d\n",(*n).val);
 	pnode nl= create_node(7);
-	//printf("%d\n",(*nl).val);
 	pnode nr= create_node(8);
-	//printf("%d\n",(*nr).val);
 	add_left(&n,&nl);
 	add_right(&n,&nr);
-	Show_node(&n);
+
+	pnode n2=create_node(180);
+	pnode nl2= create_node(70);
+	pnode nr2= create_node(80);
+	add_left(&n2,&nl2);
+	add_right(&n2,&nr2);
+	
 
 	
 	//printf("%d\n",(*n).val);
-	 ptree pt=creat_tree(n);
-	 delete_node(&n);
+	ptree pt=creat_tree(n); 
+	ptree pt2=creat_tree(n2);
+	ptree p_f=fusion(pt,pt2);
+	pnode p_f_n=(*p_f).root;
+	Show_node(&p_f_n);
+	 //delete_node(&n);
 	// Show_node(&(pt->root));
 	 //delete_tree(&(pt->root));
 	 //Show_node(&(pt->root));

@@ -54,18 +54,25 @@ void delete_tree(pnode * pn){//parcourire pour tout suprimer et pas juste la rac
 	}
 }
 
-li symbole_frequency(){
-	li inf=malloc(sizeof(li));//liste d'info composer des symboles du texte et de leures fréquance 
-	FILE* f;
-	f=fopen("eltext.txt","r");
-	int poids = 1;
-	int taille=1;
-	char* elchar=malloc (sizeof(char)*taille);
-	char* elchar2=malloc (sizeof(char)*taille);
-	fread(elchar, poids,taille, f);
-	fread(elchar2, poids,taille, f);
-	printf("%s",elchar );
-	printf("%s",elchar2 );
+void delete_tree2(ptree * pt){
+	if((*pt)->root!=NULL){
+		delete_node(&(*pt)->root);
+	}else{
+		printf("%s\n","arbre deja vide");
+	}
+}
 
+li symbole_frequency(){
 	return NULL;
+}
+
+ptree fusion(ptree pt1, ptree pt2){
+	pnode tmp_pn1=(*pt1).root;
+	pnode tmp_pn2=(*pt2).root;
+	int val_fusion=((*tmp_pn1).val)+((*tmp_pn2).val);
+	pnode n_fusion=create_node(val_fusion);
+	add_left(&n_fusion,&tmp_pn1);
+	add_right(&n_fusion,&tmp_pn2);
+	ptree t_fusion=creat_tree(n_fusion);
+	return t_fusion;
 }

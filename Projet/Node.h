@@ -45,6 +45,7 @@ void add_right(pnode * pn1, pnode * pn2);//ajoute en fils droit de n1 ,n2
 void add_left(pnode * pn1, pnode * pn2);//ajoute en fils gauche de n1, n2
 void delete_node(pnode * pn);//suprime le node pointer par pn et libere la mémoire ocuper par ce qui a été supprimer//suprime également les enfants en cascade
 void delete_tree(pnode * pn);//suprime l'arbre pointer par pt et libere la mémoire ocuper par ce que a été supprimer
+void delete_tree2(ptree * pt);
 //int find_frequency(ptree pt);//calcule la frequance de l'arbre pt
 li symbole_frequency();
 ptree fusion(ptree pt1, ptree pt2);
