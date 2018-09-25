@@ -6,24 +6,33 @@
 
 // les structures:
 
-struct liste{
-	size_t nombre_elements;
-    size_t blocs_alloues;
-    int** objets_liste;
-}liste;
-
-typedef struct liste* li;
-
 struct info{
 	int frequency;
 	char symbole;
-}info;
+};
+
+typedef struct info* info;
+
+struct nodeListe{
+	tree val;
+	nodeListe suivant;
+};
+
+typedef struct nodeListe nodeL;
+
+struct liste{
+	nodeListe head;
+	int taille;
+};
+
+typedef struct liste* li;
+
 
 struct node{
-	int val;//le simbole et la frequance
+	info in;//le simbole et la frequance
 	struct node* right;//fils droit
 	struct node* left;//fils gauche
-}node;
+};
 
 typedef struct node* pnode;
 
@@ -32,24 +41,27 @@ typedef struct node* pnode;
 struct tree{
 	pnode root;//racine de l'arbre
 	int frequency;//frequance de l'arbre
-}tree;
+};
 
 typedef struct tree* ptree;
 
 // les fonctions:
+li createListe();
+int addListe(li,info);
 
-void Show_node(pnode * pn);//affiche dans le terminale chaques elements que contien le node pointer par pn
-pnode create_node(int val);//creer un node et lui affecte la valeur val
-ptree creat_tree(pnode  root);//creer un arbre et lui affecte root comme racine
-void add_right(pnode * pn1, pnode * pn2);//ajoute en fils droit de n1 ,n2
-void add_left(pnode * pn1, pnode * pn2);//ajoute en fils gauche de n1, n2
-void delete_node(pnode * pn);//suprime le node pointer par pn et libere la mémoire ocuper par ce qui a été supprimer//suprime également les enfants en cascade
-void delete_tree(pnode * pn);//suprime l'arbre pointer par pt et libere la mémoire ocuper par ce que a été supprimer
-void delete_tree2(ptree * pt);
-//int find_frequency(ptree pt);//calcule la frequance de l'arbre pt
-li symbole_frequency();
-ptree fusion(ptree pt1, ptree pt2);
+
+
+//void Show_node(pnode);//affiche dans le terminale chaques elements que contien le node pointer par pn
+pnode create_node(info);//creer un node et lui affecte la valeur val
+int frequency(pnode);
+ptree create_tree(pnode);//creer un arbre et lui affecte root comme racine
+void add_right(pnode, pnode);//ajoute en fils droit de n1 ,n2
+void add_left(pnode, pnode);//ajoute en fils gauche de n1, n2
+void delete_info(info);
+void delete_node(pnode);//suprime le node pointer par pn et libere la mémoire ocuper par ce qui a été supprimer//suprime également les enfants en cascade
+void delete_tree(ptree);//suprime l'arbre pointer par pt et libere la mémoire ocuper par ce que a été supprimer
+
+
 
 
 #endif
-
