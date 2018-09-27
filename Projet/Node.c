@@ -71,7 +71,7 @@ void add_left(pnode pn1, pnode pn2){
 void delete_info(info in){
 	(*in).frequency=0;
 	(*in).symbole=NULL;
-	free(*in);
+	free(in);
 }
 
 void delete_node(pnode pn){
@@ -84,12 +84,13 @@ void delete_node(pnode pn){
 	 (*pn).right=NULL;
 	 (*pn).left=NULL;
 	 delete_info((*pn).in);
-	 free(*pn);
+	 free(pn);
 }
 
 void delete_tree(ptree pt){
 	delete_node((*pt).root);
 	(*pt).frequency=0;
-	free(*pt);
+	free(pt);
 }
+
 
