@@ -11,7 +11,7 @@ Generalisation du code , algo de huffman générique
 les structureset leurs fonctions
 algo de suppression d'arbe///PFO
 les structure générique///Hakim
-
+correction des erreurs de structure et de fonction//PFO
 
 
 
