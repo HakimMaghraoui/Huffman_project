@@ -135,13 +135,14 @@ li symbole_frequency(){
 }
 
 ptree fusion(ptree pt1, ptree pt2){//PF
-	// pnode tmp_pn1=(*pt1).root;
-	// pnode tmp_pn2=(*pt2).root;
-	// int val_fusion=((*tmp_pn1).val)+((*tmp_pn2).val);
-	// pnode n_fusion=create_node(val_fusion);
-	// add_left(&n_fusion,&tmp_pn1);
-	// add_right(&n_fusion,&tmp_pn2);
-	// ptree t_fusion=creat_tree(n_fusion);
-	//return t_fusion;
-	return NULL;
+	pnode tmp_pn1=(*pt1).root;
+	pnode tmp_pn2=(*pt2).root;
+	int val_fusion=((*tmp_pn1).in->frequency)+((*tmp_pn2).in->frequency);
+	pinfo info_fusion=create_info(val_fusion,"");
+	pnode n_fusion=create_node(info_fusion);
+	add_left(&n_fusion,&tmp_pn1);
+	add_right(&n_fusion,&tmp_pn2);
+	ptree t_fusion=creat_tree(n_fusion);
+	return t_fusion;
+	
 }

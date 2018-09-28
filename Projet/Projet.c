@@ -29,23 +29,24 @@ int main(){
 	// Show_node(&n);
 	// delete_node(nl);
 	// Show_node(&n);
-	// pnode n2=create_node(180);
-	// pnode nl2= create_node(70);
-	// pnode nr2= create_node(80);
+	pnode n2=create_node(inf);
+	pnode nl2= create_node(infl);
+	pnode nr2= create_node(infr);
 	 add_left(&n,&nl);
 	 add_right(&n,&nr);
-	Show_node(&n);
+	//Show_node(&n);
 
 	
 	ptree pt=creat_tree(n);
-	Show_node(&(*pt).root);
-	delete_tree(&pt);
-	Show_node(&(*pt).root);
+	// Show_node(&(*pt).root);
+	// delete_tree(&pt);
+	// Show_node(&(*pt).root);
 
-	//ptree pt2=creat_tree(n2);
-	// ptree p_f=fusion(pt,pt2);
-	// pnode p_f_n=(*p_f).root;
-	// Show_node(&p_f_n);
+
+	ptree pt2=creat_tree(n2);
+	 ptree p_f=fusion(pt,pt2);
+	 pnode p_f_n=(*p_f).root;
+	 Show_node(&p_f_n);
 	
 
 
