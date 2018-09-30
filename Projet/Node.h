@@ -51,7 +51,10 @@ typedef struct liste* li;
 li createListe();
 void addListe(li liste,ptree va);
 int frequency(pnode pt);
-
+int frequency(pnode pt);
+int estDansListe(li liste, char c);
+void addFrequencySymbole(li liste, char c);
+li symbole_frequency(char* txt);
 pinfo create_info(int f, char c);
 
 void Show_node(pnode * pn);//affiche dans le terminale chaques elements que contien le node pointer par pn
@@ -64,8 +67,6 @@ void delete_node(pnode  pn);//suprime le node pointer par pn et libere la mémoi
 void delete_tree(ptree * pt);//suprime l'arbre pointer par pt et libere la mémoire ocuper par ce que a été supprimer
 
 void delete_info(pinfo pin);
-//int find_frequency(ptree pt);//calcule la frequance de l'arbre pt
-li symbole_frequency();
 ptree fusion(ptree pt1, ptree pt2);
 
 
