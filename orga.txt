@@ -1,18 +1,14 @@
 //////////////////////A FAIRE////////////////////////
-algo de fusion
-algos de frequances
+
 compression
 decompression
-frequance de chaque simbole
-algo du gros arbre
 algo pour lire et écrire dans les fichiers
 Generalisation du code , algo de huffman générique
 //////////////////////EN COURS/////////////////
-les structureset leurs fonctions
-algo de suppression d'arbe///PFO
-les structure générique///Hakim
-correction des erreurs de structure et de fonction//PFO
 
+algo du gros arbre//PF
+les structure générique///Hakim plus taard
+frequance de chaque simbole dans le main//Hakim
 
 
 
@@ -25,9 +21,11 @@ correction des erreurs de structure et de fonction//PFO
 
 
 /////////////////FAITS////////////////////////
+algo de suppression d'arbe///PFO
+algo de fusion//PF
+algos de frequance//Hakim
 
-
-
+les structureset leurs fonctions//PF
 
 
 
