@@ -129,9 +129,49 @@ int frequency(pnode pt){//Hakim
 	// return left+right+pt->in->frequency;
 	return 0;
 }
+int estDansListe(li liste, char c){
+	if(liste->head==NULL){
+		return 1;
+	}else{
+		nl tmp= liste->head;
+		while(tmp!=NULL){
+			if(tmp->val->root->in->symbole == c){
+				return 0;
+			}else{
+				tmp=tmp->suivant;
+			}
+		}
+	}
+	return 1;
+}
+
+void addFrequencySymbole(li liste, char c){
+	nl tmp= liste->head;
+	while(tmp!=NULL){
+		if(tmp->val->root->in->symbole == c){
+			tmp->val->root->in->frequency++;
+			break;
+		}else{
+			tmp=tmp->suivant;
+		}
+	}
+}
 
 li symbole_frequency(){
-	return NULL;
+	li liste = createListe();
+	int i;
+	for(i=0;i<strlen(txt);i++){
+		if(estDansListe(liste,txt[i])==0){
+			addFrequencySymbole(liste,c);
+		}else{
+			pinfo pii= create_info(1,txt[i]);
+			pnode pnn= create_node(pii);
+			ptree ptt= create_tree(pnn);
+			addListe(liste, ptt);
+		}
+	}
+	return li;
+	
 }
 
 ptree fusion(ptree pt1, ptree pt2){//PF
