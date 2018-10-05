@@ -4,9 +4,9 @@ int main(){
 	
 
 
-	pinfo inf=create_info(7,"o");	
-	pinfo infl=create_info(700,"o");
-	pinfo infr=create_info(70,"o");
+	pinfo inf=create_info(7,'o');	
+	pinfo infl=create_info(700,'o');
+	pinfo infr=create_info(70,'o');
 	// struct info infl=create_info(90,"p");
 
 	// struct info infr=create_info(87,"i");
@@ -37,17 +37,26 @@ int main(){
 	//Show_node(&n);
 
 	
-	ptree pt=creat_tree(n);
+	ptree pt=create_tree(n);
 	// Show_node(&(*pt).root);
 	// delete_tree(&pt);
 	// Show_node(&(*pt).root);
 
 
-	ptree pt2=creat_tree(n2);
+	ptree pt2=create_tree(n2);
 	 ptree p_f=fusion(pt,pt2);
 	 pnode p_f_n=(*p_f).root;
 	 Show_node(&p_f_n);
 	
+	li liste=createListe();
+	liste=symbole_frequency("jhzkjh");
+	nodeL tmp=liste->head;
+	while(tmp!=NULL){
+		printf("%c\n",tmp->val->root->in->symbole);
+		printf("%d\n",tmp->val->root->in->frequency);
+		tmp=tmp->suivant;
+	}
+
 
 
 	printf("%s\n","complet" );
