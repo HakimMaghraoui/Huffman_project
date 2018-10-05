@@ -117,15 +117,15 @@ void delete_tree(ptree * pt){//PF
 
 
 int frequency(pnode pt){//Hakim
-	// int left=0;
-	// int right=0;
-	// if(pt->left!=NULL){
-	// 	left=frequency(pt->left);
-	// }
-	// if(pt->right!=NULL){
-	// 	right=frequency(pt->right);
-	// }
-	// return left+right+pt->in->frequency;
+	int left=0;
+	int right=0;
+	if(pt->left!=NULL){
+		left=frequency(pt->left);
+	}
+	if(pt->right!=NULL){
+		right=frequency(pt->right);
+	}
+	return left+right+pt->in->frequency;
 	return 0;
 }
 
