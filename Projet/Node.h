@@ -40,7 +40,7 @@ struct nodeListe{
 typedef struct nodeListe nodeL;
 
 struct liste{
-	struct nodeListe head;
+	nodeL head;
 	int taille;
 };
 
