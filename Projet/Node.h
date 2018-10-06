@@ -57,7 +57,7 @@ int estDansListe(li liste, char c);
 void addFrequencySymbole(li liste, char c);
 li symbole_frequency(char* txt);
 pinfo create_info(int f, char c);
-
+ptree min_freq_liste(li liste);
 
 void Show_node(pnode * pn);//affiche dans le terminale chaques elements que contien le node pointer par pn
 pnode create_node(pinfo inf);//creer un node et lui affecte la valeur val

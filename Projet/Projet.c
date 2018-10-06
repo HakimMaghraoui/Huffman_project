@@ -52,14 +52,42 @@ int main(){
 	liste=symbole_frequency("jhzkjh");
 	nodeL tmp=liste->head;
 	while(tmp!=NULL){
-		printf("%c\n",tmp->val->root->in->symbole);
+		printf("%c",tmp->val->root->in->symbole);
 		printf("%d\n",tmp->val->root->in->frequency);
 		tmp=tmp->suivant;
 	}
+	printf("\n");
+	pinfo infaa=create_info(2,'h');
+	pnode aa=create_node(infaa);
+	ptree taa=create_tree(aa);
+	//delete_node_liste(liste, taa);
+	tmp=liste->head;
+	while(tmp!=NULL){
+		printf("%c",tmp->val->root->in->symbole);
+		printf("%d\n",tmp->val->root->in->frequency);
+		tmp=tmp->suivant;
+	}
+	printf("\n");
+	ptree tbb=min_freq_liste(liste);
+	printf("%c",tbb->root->in->symbole);
+	printf("%d\n",tbb->root->in->frequency);
+	printf("%s\n","big tree test:" );
+	ptree btree=big_tree(liste);
+	printf("%s\n","test sd" );
+	tmp=liste->head;
+	while(tmp!=NULL){
+		printf("%c",tmp->val->root->in->symbole);
+		printf("%d\n",tmp->val->root->in->frequency);
+		tmp=tmp->suivant;
+	}
+	
 
+	
 
-
+	///////////////////////////////
 	printf("%s\n","complet" );
+
+
 
 
 	return 0;

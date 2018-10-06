@@ -205,30 +205,52 @@ ptree fusion(ptree pt1, ptree pt2){//PF
 	
 }
 
-void sort_liste(li liste){
-	// int i,j;
-	// for(i=0,i<(int)liste->taille;i++){
-	// 	for()
-	// }
-
-
+ptree min_freq_liste(li liste){
+	int i;
+	int min=liste->head->val->root->in->frequency;
+	nodeL tmp=liste->head;
+	ptree res=tmp->val;
+	for(i=0;i<liste->taille;i++){
+		if(tmp->val->root->in->frequency<min){
+			min=tmp->val->root->in->frequency;
+			res=tmp->val;
+		}
+		tmp=tmp->suivant;
+	}
+	return res;
 }
+
+// void sort_liste(li liste){
+// 	// int i,j;
+// 	// for(i=0,i<(int)liste->taille;i++){
+// 	// 	for()
+// 	// }
+
+
+// }
 
 ptree big_tree(li liste){//on prend les mini ensuite on les fusione on supprime de la liste les deux mini et on ajoute la fusiona la liste
 	
-	// ptree fus =malloc(sizeof(tree));
-	// ptree min1 =malloc(sizeof(tree));
-	// ptree min2 = malloc(sizeof(tree));
-	// while(liste->val->head->suivant!=NULL){
-	// 	min1=min_freq_lisre(liste);
-	// 	delete_node_liste(min1);
-	// 	min2=min_freq_lisre(liste);
-	// 	delete_node_liste(min2);
-	// 	fus=fusion(min1,min2);
-	// 	addListe(liste,fus);		
-	// }
-	// return liste->head->val;
-	return NULL;
+	ptree fus =malloc(sizeof(tree));
+	ptree min1 =malloc(sizeof(tree));
+	ptree min2 = malloc(sizeof(tree));
+	while(liste->head->suivant!=NULL){
+		printf("%s\n","test1" );
+		min1=min_freq_liste(liste);
+		printf("%s\n","test2" );
+		delete_node_liste(liste,min1);
+		printf("%s\n","test3" );
+		min2=min_freq_liste(liste);
+		printf("%s\n","test4" );
+		delete_node_liste(liste,min2);
+		printf("%s\n","test5" );
+		fus=fusion(min1,min2);
+		printf("%s\n","test6" );
+		addListe(liste,fus);
+		printf("%s\n","test7" );		
+	}
+	return liste->head->val;
+	// return NULL;
 
 }
 
