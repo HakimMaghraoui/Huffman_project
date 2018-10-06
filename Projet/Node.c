@@ -1,4 +1,5 @@
 #include "Node.h"
+#include <string.h>
 
 
 void Show_node(pnode * pn){//PF
@@ -21,7 +22,7 @@ pnode create_node(pinfo in){//PF
 	return res;
 }
 
-ptree creat_tree(pnode pn){//PF
+ptree create_tree(pnode pn){//PF
 	ptree res =malloc(sizeof(tree));
 	(*res).root=pn;
 	(*res).frequency=frequency(pn);
@@ -30,27 +31,25 @@ ptree creat_tree(pnode pn){//PF
 
 li createListe(){//Hakim
 	li liste=malloc(sizeof(liste));
-	nodeL h;
-	h.val=*creat_tree(NULL);
-	h.suivant=NULL;
-	liste->head=h;
+	liste->head=NULL;
 	liste->taille=0;
 	return liste;
 }
 
-void addListe(li liste,struct tree va){//Hakim
-	nodeL nl;
-	nl.val=va;
-	nl.suivant=NULL;
+void addListe(li liste,ptree va){//Hakim
+	nodeL nl= malloc(sizeof(nodeL));
+	nl->val=va;
+	nl->suivant=NULL;
 	if(liste->taille==0){
 		liste->head=nl;
 		liste->taille++;
 	}else{
 		nodeL tmp=liste->head;
-		while(tmp.suivant!=NULL){
-			tmp=*tmp.suivant;
+		while(tmp->suivant!=NULL){
+			tmp=(*tmp).suivant;
 		}
-		tmp.suivant=&nl;
+		tmp->suivant=nl;
+		liste->taille++;
 	}
 }
 
@@ -65,8 +64,8 @@ void add_left(pnode * pn1, pnode * pn2){//PF
 
 void delete_info(pinfo pin){//Hakim
 	(*pin).frequency=0;
-	(*pin).symbole=NULL;
-	//free((*in));
+	 (*pin).symbole='\0';
+	free((&pin));
 }
 
 // void delete_node(pnode * pn){//PF
@@ -107,6 +106,25 @@ void delete_node(pnode pn){//PF&Hakim
 // }
 
 
+void delete_node_liste(li liste, ptree v){
+	nodeL tmp=liste->head;
+	nodeL prev=tmp;
+	if(tmp->val->root->in->symbole==v->root->in->symbole){
+		liste->head=tmp->suivant;
+		free(tmp);
+		return;
+	}
+	while(tmp!= NULL && tmp->val->root->in->symbole!= v->root->in->symbole){
+		prev=tmp;
+		tmp=tmp->suivant;
+	}
+	if(tmp==NULL){
+		return;
+	}
+	prev->suivant=tmp->suivant;
+	//free(tmp);
+	liste->taille--;
+}
 
 void delete_tree(ptree * pt){//PF
 	if((*pt)->root!=NULL){
@@ -118,22 +136,23 @@ void delete_tree(ptree * pt){//PF
 
 
 int frequency(pnode pt){//Hakim
-	// int left=0;
-	// int right=0;
-	// if(pt->left!=NULL){
-	// 	left=frequency(pt->left);
-	// }
-	// if(pt->right!=NULL){
-	// 	right=frequency(pt->right);
-	// }
-	// return left+right+pt->in->frequency;
+	int left=0;
+	int right=0;
+	if(pt->left!=NULL){
+		left=frequency(pt->left);
+	}
+	if(pt->right!=NULL){
+		right=frequency(pt->right);
+	}
+	return left+right+pt->in->frequency;
 	return 0;
 }
+
 int estDansListe(li liste, char c){
 	if(liste->head==NULL){
 		return 1;
 	}else{
-		nl tmp= liste->head;
+		nodeL tmp= liste->head;
 		while(tmp!=NULL){
 			if(tmp->val->root->in->symbole == c){
 				return 0;
@@ -146,7 +165,7 @@ int estDansListe(li liste, char c){
 }
 
 void addFrequencySymbole(li liste, char c){
-	nl tmp= liste->head;
+	nodeL tmp= liste->head;
 	while(tmp!=NULL){
 		if(tmp->val->root->in->symbole == c){
 			tmp->val->root->in->frequency++;
@@ -157,12 +176,12 @@ void addFrequencySymbole(li liste, char c){
 	}
 }
 
-li symbole_frequency(){
+li symbole_frequency(char* txt){
 	li liste = createListe();
 	int i;
-	for(i=0;i<strlen(txt);i++){
+	for(i=0;i<(int)strlen(txt);i++){
 		if(estDansListe(liste,txt[i])==0){
-			addFrequencySymbole(liste,c);
+			addFrequencySymbole(liste,txt[i]);
 		}else{
 			pinfo pii= create_info(1,txt[i]);
 			pnode pnn= create_node(pii);
@@ -170,19 +189,49 @@ li symbole_frequency(){
 			addListe(liste, ptt);
 		}
 	}
-	return li;
-	
+	return liste;
 }
 
 ptree fusion(ptree pt1, ptree pt2){//PF
 	pnode tmp_pn1=(*pt1).root;
 	pnode tmp_pn2=(*pt2).root;
 	int val_fusion=((*tmp_pn1).in->frequency)+((*tmp_pn2).in->frequency);
-	pinfo info_fusion=create_info(val_fusion,"");
+	pinfo info_fusion=create_info(val_fusion,'\0');
 	pnode n_fusion=create_node(info_fusion);
 	add_left(&n_fusion,&tmp_pn1);
 	add_right(&n_fusion,&tmp_pn2);
-	ptree t_fusion=creat_tree(n_fusion);
+	ptree t_fusion=create_tree(n_fusion);
 	return t_fusion;
 	
 }
+
+void sort_liste(li liste){
+	// int i,j;
+	// for(i=0,i<(int)liste->taille;i++){
+	// 	for()
+	// }
+
+
+}
+
+ptree big_tree(li liste){//on prend les mini ensuite on les fusione on supprime de la liste les deux mini et on ajoute la fusiona la liste
+	
+	// ptree fus =malloc(sizeof(tree));
+	// ptree min1 =malloc(sizeof(tree));
+	// ptree min2 = malloc(sizeof(tree));
+	// while(liste->val->head->suivant!=NULL){
+	// 	min1=min_freq_lisre(liste);
+	// 	delete_node_liste(min1);
+	// 	min2=min_freq_lisre(liste);
+	// 	delete_node_liste(min2);
+	// 	fus=fusion(min1,min2);
+	// 	addListe(liste,fus);		
+	// }
+	// return liste->head->val;
+	return NULL;
+
+}
+
+// char compress(file f,ptree pt){
+
+// }
