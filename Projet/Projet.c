@@ -1,59 +1,74 @@
 #include "Node.h"
 
 int main(){
-	// pnode nr=malloc(sizeof(pnode));
-	// (*nr).val=9;
-	// (*nr).right=NULL;
-	// (*nr).left=NULL;
-	// printf("nr vaut: %d\n",(*nr).val );
-	// pnode nl=malloc(sizeof(pnode));
-	// (*nl).val=4;
-	// (*nl).right=NULL;
-	// (*nl).left=NULL;
-	// printf("nl vaut: %d\n",(*nl).val );
-	// pnode n=malloc(sizeof(pnode));
-	// (*n).val=7;
-	// (*n).right=nr;
-	// (*n).left=nl;
-	// printf("n vaut: %d\n",(*n).val );
+	
 
 
+	pinfo inf=create_info(7,'o');	
+	pinfo infl=create_info(700,'o');
+	pinfo infr=create_info(70,'o');
+	// struct info infl=create_info(90,"p");
 
-	// ptree p=malloc(sizeof(ptree));
-	// (*p).root=n;
-	// (*p).frequency=1;
-	// printf("%d\n",(*p).frequency );
+	// struct info infr=create_info(87,"i");
+
+	 pnode n=create_node(inf);
 	// Show_node(&n);
+	 // delete_info(inf);
+	 // Show_node(&n);
+	 pnode nl= create_node(infl);
+	 pnode nr= create_node(infr);
+	//delete_info(inf); 
 
-	pnode n=create_node(18);
-	pnode nl= create_node(7);
-	pnode nr= create_node(8);
-	add_left(&n,&nl);
-	add_right(&n,&nr);
+	//Show_node(&n);
+	// Show_node(&n);
+	//  pnode nl= create_node(infl);
+	//  pnode nr= create_node(infr);
 
-	pnode n2=create_node(180);
-	pnode nl2= create_node(70);
-	pnode nr2= create_node(80);
-	add_left(&n2,&nl2);
-	add_right(&n2,&nr2);
+	// add_left(&n,&nl);
+	// add_right(&n,&nr);
+	// Show_node(&n);
+	// delete_node(nl);
+	// Show_node(&n);
+	pnode n2=create_node(inf);
+	pnode nl2= create_node(infl);
+	pnode nr2= create_node(infr);
+	 add_left(&n,&nl);
+	 add_right(&n,&nr);
+	//Show_node(&n);
+
 	
+	ptree pt=create_tree(n);
+	// Show_node(&(*pt).root);
+	// delete_tree(&pt);
+	// Show_node(&(*pt).root);
 
+
+	ptree pt2=create_tree(n2);
+	 ptree p_f=fusion(pt,pt2);
+	 pnode p_f_n=(*p_f).root;
+	 Show_node(&p_f_n);
 	
-	//printf("%d\n",(*n).val);
-	ptree pt=creat_tree(n); 
-	ptree pt2=creat_tree(n2);
-	ptree p_f=fusion(pt,pt2);
-	pnode p_f_n=(*p_f).root;
-	Show_node(&p_f_n);
-	 //delete_node(&n);
-	// Show_node(&(pt->root));
-	 //delete_tree(&(pt->root));
-	 //Show_node(&(pt->root));
-	//symbole_frequency();
-
-
-	printf("%s\n","Test Complet" );
+	li liste=createListe();
+	liste=symbole_frequency("jhzkjh");
+	nodeL tmp=liste->head;
+	while(tmp!=NULL){
+		printf("%c",tmp->val->root->in->symbole);
+		printf("%d\n",tmp->val->root->in->frequency);
+		tmp=tmp->suivant;
+	}
+	pinfo infaa=create_info(2,'h');
+	pnode aa=create_node(infaa);
+	ptree taa=create_tree(aa);
+	delete_node_liste(liste, taa);
+	tmp=liste->head;
+	while(tmp!=NULL){
+		printf("%c",tmp->val->root->in->symbole);
+		printf("%d\n",tmp->val->root->in->frequency);
+		tmp=tmp->suivant;
+	}
+	printf("%s\n","complet" );
 
 
 	return 0;
 }
+

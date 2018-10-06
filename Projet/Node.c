@@ -22,7 +22,7 @@ pnode create_node(pinfo in){//PF
 	return res;
 }
 
-ptree creat_tree(pnode pn){//PF
+ptree create_tree(pnode pn){//PF
 	ptree res =malloc(sizeof(tree));
 	(*res).root=pn;
 	(*res).frequency=frequency(pn);
@@ -37,20 +37,39 @@ li createListe(){//Hakim
 }
 
 void addListe(li liste,ptree va){//Hakim
-	nodeL nl;
-	nl.val=va;
-	nl.suivant=NULL;
+	nodeL nl=malloc(sizeof(nodeL));
+	nl->val=va;
+	nl->suivant=NULL;
 	if(liste->taille==0){
 		liste->head=nl;
 		liste->taille++;
 	}else{
 		nodeL tmp=liste->head;
-		while(tmp.suivant!=NULL){
-			tmp=*tmp.suivant;
+		while(tmp->suivant!=NULL){
+			tmp=(*tmp).suivant;
 		}
-		tmp.suivant=&nl;
+		tmp->suivant=nl;
 		liste->taille++;
 	}
+}
+
+void delete_node_liste(li liste, ptree v){
+	nodeL tmp=liste->head;
+	nodeL prev=tmp;
+	if(tmp->val->root->in->symbole==v->root->in->symbole){
+		liste->head=tmp->suivant;
+		free(tmp);
+		return;
+	}
+	while(tmp!= NULL && tmp->val->root->in->symbole!= v->root->in->symbole){
+		prev=tmp;
+		tmp=tmp->suivant;
+	}
+	if(tmp==NULL){
+		return;
+	}
+	prev->suivant=tmp->suivant;
+	free(tmp);
 }
 
 void add_right(pnode * pn1, pnode * pn2){//PF
@@ -64,8 +83,8 @@ void add_left(pnode * pn1, pnode * pn2){//PF
 
 void delete_info(pinfo pin){//Hakim
 	(*pin).frequency=0;
-	(*pin).symbole=NULL;
-	free((*pin));
+	(*pin).symbole='\0';
+	free((pin));
 }
 
 // void delete_node(pnode * pn){//PF
@@ -107,9 +126,9 @@ void delete_node(pnode pn){//PF&Hakim
 
 
 
-void delete_tree(ptree * pt){//PF
-	if((*pt)->root!=NULL){
-		delete_node((*pt)->root);
+void delete_tree(ptree pt){//PF
+	if((pt)->root!=NULL){
+		delete_node((pt)->root);
 	}else{
 		printf("%s\n","arbre deja vide");
 	}
@@ -133,7 +152,7 @@ int estDansListe(li liste, char c){
 	if(liste->head==NULL){
 		return 1;
 	}else{
-		nl tmp= liste->head;
+		nodeL tmp= liste->head;
 		while(tmp!=NULL){
 			if(tmp->val->root->in->symbole == c){
 				return 0;
@@ -146,7 +165,7 @@ int estDansListe(li liste, char c){
 }
 
 void addFrequencySymbole(li liste, char c){
-	nl tmp= liste->head;
+	nodeL tmp= liste->head;
 	while(tmp!=NULL){
 		if(tmp->val->root->in->symbole == c){
 			tmp->val->root->in->frequency++;
@@ -160,9 +179,9 @@ void addFrequencySymbole(li liste, char c){
 li symbole_frequency(char* txt){
 	li liste = createListe();
 	int i;
-	for(i=0;i<strlen(txt);i++){
+	for(i=0;i<(int)strlen(txt);i++){
 		if(estDansListe(liste,txt[i])==0){
-			addFrequencySymbole(liste,c);
+			addFrequencySymbole(liste,txt[i]);
 		}else{
 			pinfo pii= create_info(1,txt[i]);
 			pnode pnn= create_node(pii);
@@ -170,19 +189,30 @@ li symbole_frequency(char* txt){
 			addListe(liste, ptt);
 		}
 	}
-	return li;
+	return liste;
 }
 
 ptree fusion(ptree pt1, ptree pt2){//PF
 	pnode tmp_pn1=(*pt1).root;
 	pnode tmp_pn2=(*pt2).root;
 	int val_fusion=((*tmp_pn1).in->frequency)+((*tmp_pn2).in->frequency);
-	pinfo info_fusion=create_info(val_fusion,"");
+	pinfo info_fusion=create_info(val_fusion,'\0');
 	pnode n_fusion=create_node(info_fusion);
 	add_left(&n_fusion,&tmp_pn1);
 	add_right(&n_fusion,&tmp_pn2);
-	ptree t_fusion=creat_tree(n_fusion);
+	ptree t_fusion=create_tree(n_fusion);
 	return t_fusion;
 	
 }
+
+
+
+/*void min_freq_liste(li liste){
+	int i;
+	for(i=0;i<
+}*/
+
+/*ptree big_tree(li liste){
+	
+}*/
 
