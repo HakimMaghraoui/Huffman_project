@@ -42,33 +42,54 @@ int main(){
 	// delete_tree(&pt);
 	// Show_node(&(*pt).root);
 
-
+	printf("%s\n","test fusion" );
 	ptree pt2=create_tree(n2);
 	 ptree p_f=fusion(pt,pt2);
+	 Show_node(&(*p_f).root);
 	 pnode p_f_n=(*p_f).root;
-	 Show_node(&p_f_n);
+	 printf("%s\n","///////" );
 	
 	li liste=createListe();
-	liste=symbole_frequency("jhzkjh");
+	char* texte= "jnhihuyuyzkjh";
+	liste=symbole_frequency(texte);
 	nodeL tmp=liste->head;
 	while(tmp!=NULL){
 		printf("%c",tmp->val->root->in->symbole);
 		printf("%d\n",tmp->val->root->in->frequency);
 		tmp=tmp->suivant;
 	}
-	pinfo infaa=create_info(2,'h');
+	printf("\n");
+	pinfo infaa=create_info(2,'j');
 	pnode aa=create_node(infaa);
 	ptree taa=create_tree(aa);
-	delete_node_liste(liste, taa);
+	//delete_node_liste(liste, taa);
 	tmp=liste->head;
 	while(tmp!=NULL){
 		printf("%c",tmp->val->root->in->symbole);
 		printf("%d\n",tmp->val->root->in->frequency);
 		tmp=tmp->suivant;
 	}
+	printf("\n");
+	ptree tbb=min_freq_liste(liste);
+	printf("%c",tbb->root->in->symbole);
+	printf("%d\n",tbb->root->in->frequency);
+	
+
+	printf("%s\n","big tree test:" );
+	ptree btree=big_tree(liste);
+	printf("%s\n","test sd" );
+	tmp=liste->head;
+	while(tmp!=NULL){
+		printf("%c",tmp->val->root->in->symbole);
+		printf("%d\n",tmp->val->root->in->frequency);
+		tmp=tmp->suivant;
+	}
+	char* code=compress(texte,btree);
+	printf("%s\n",code);
+	
+
+	///////////////////////////////
 	printf("%s\n","complet" );
-
-
 	return 0;
 }
 

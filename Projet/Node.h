@@ -57,6 +57,7 @@ int estDansListe(li liste, char c);
 void addFrequencySymbole(li liste, char c);
 li symbole_frequency(char* txt);
 pinfo create_info(int f, char c);
+ptree min_freq_liste(li liste);
 
 void Show_node(pnode * pn);//affiche dans le terminale chaques elements que contien le node pointer par pn
 pnode create_node(pinfo inf);//creer un node et lui affecte la valeur val
@@ -65,14 +66,15 @@ void add_right(pnode * pn1, pnode * pn2);//ajoute en fils droit de n1 ,n2
 void add_left(pnode * pn1, pnode * pn2);//ajoute en fils gauche de n1, n2
 void delete_node(pnode  pn);//suprime le node pointer par pn et libere la mémoire ocuper par ce qui a été supprimer//suprime également les enfants en cascade
 
-void delete_tree(ptree pt);//suprime l'arbre pointer par pt et libere la mémoire ocuper par ce que a été supprimer
+void delete_tree(ptree * pt);//suprime l'arbre pointer par pt et libere la mémoire ocuper par ce que a été supprimer
 
 void delete_info(pinfo pin);
+void sort_liste(li liste);//fonction qui trie une liste d'arbrepar en fonction de leurs frequances
 ptree fusion(ptree pt1, ptree pt2);
-//void sort_liste(li liste);
-//ptree big_tree(li liste);
+ptree big_tree(li liste);
+char* codage(char c, pnode pn);
+char* compress(char* txt, ptree pt);
 
 #endif
-
 
 

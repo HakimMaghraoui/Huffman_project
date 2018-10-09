@@ -37,7 +37,7 @@ li createListe(){//Hakim
 }
 
 void addListe(li liste,ptree va){//Hakim
-	nodeL nl=malloc(sizeof(nodeL));
+	nodeL nl= malloc(sizeof(nodeL));
 	nl->val=va;
 	nl->suivant=NULL;
 	if(liste->taille==0){
@@ -53,25 +53,6 @@ void addListe(li liste,ptree va){//Hakim
 	}
 }
 
-void delete_node_liste(li liste, ptree v){
-	nodeL tmp=liste->head;
-	nodeL prev=tmp;
-	if(tmp->val->root->in->symbole==v->root->in->symbole){
-		liste->head=tmp->suivant;
-		free(tmp);
-		return;
-	}
-	while(tmp!= NULL && tmp->val->root->in->symbole!= v->root->in->symbole){
-		prev=tmp;
-		tmp=tmp->suivant;
-	}
-	if(tmp==NULL){
-		return;
-	}
-	prev->suivant=tmp->suivant;
-	free(tmp);
-}
-
 void add_right(pnode * pn1, pnode * pn2){//PF
 	(*pn1)->right=(*pn2);
 }
@@ -84,7 +65,7 @@ void add_left(pnode * pn1, pnode * pn2){//PF
 void delete_info(pinfo pin){//Hakim
 	(*pin).frequency=0;
 	(*pin).symbole='\0';
-	free((pin));
+	free(&pin);
 }
 
 // void delete_node(pnode * pn){//PF
@@ -125,10 +106,29 @@ void delete_node(pnode pn){//PF&Hakim
 // }
 
 
+void delete_node_liste(li liste, ptree v){
+	nodeL tmp=liste->head;
+	nodeL prev=tmp;
+	if(tmp->val->root->in->symbole==v->root->in->symbole){
+		liste->head=tmp->suivant;
+		free(tmp);
+		return;
+	}
+	while(tmp!= NULL && tmp->val->root->in->symbole!= v->root->in->symbole && tmp->val->root->in->frequency!= v->root->in->frequency){
+		prev=tmp;
+		tmp=tmp->suivant;
+	}
+	if(tmp==NULL){
+		return;
+	}
+	prev->suivant=tmp->suivant;
+	free(tmp);
+	liste->taille--;
+}
 
-void delete_tree(ptree pt){//PF
-	if((pt)->root!=NULL){
-		delete_node((pt)->root);
+void delete_tree(ptree * pt){//PF
+	if((*pt)->root!=NULL){
+		delete_node((*pt)->root);
 	}else{
 		printf("%s\n","arbre deja vide");
 	}
@@ -196,7 +196,7 @@ ptree fusion(ptree pt1, ptree pt2){//PF
 	pnode tmp_pn1=(*pt1).root;
 	pnode tmp_pn2=(*pt2).root;
 	int val_fusion=((*tmp_pn1).in->frequency)+((*tmp_pn2).in->frequency);
-	pinfo info_fusion=create_info(val_fusion,'\0');
+	pinfo info_fusion=create_info(val_fusion,'\spadesuit');
 	pnode n_fusion=create_node(info_fusion);
 	add_left(&n_fusion,&tmp_pn1);
 	add_right(&n_fusion,&tmp_pn2);
@@ -205,14 +205,108 @@ ptree fusion(ptree pt1, ptree pt2){//PF
 	
 }
 
+ptree min_freq_liste(li liste){
+	int min=liste->head->val->root->in->frequency;
+	nodeL tmp=liste->head;
+	ptree res=tmp->val;
+	while(tmp!=NULL){
+		if(tmp->val->root->in->frequency<min){
+			min=tmp->val->root->in->frequency;
+			res=tmp->val;
+		}
+		tmp=tmp->suivant;
+	}
+	return res;
+}
+
+// void sort_liste(li liste){
+// 	// int i,j;
+// 	// for(i=0,i<(int)liste->taille;i++){
+// 	// 	for()
+// 	// }
 
 
-/*void min_freq_liste(li liste){
-	int i;
-	for(i=0;i<
-}*/
+// }
 
-/*ptree big_tree(li liste){
+ptree big_tree(li liste){//on prend les mini ensuite on les fusione on supprime de la liste les deux mini et on ajoute la fusiona la liste
 	
-}*/
+	ptree fus =malloc(sizeof(tree));
+	ptree min1 =malloc(sizeof(tree));
+	ptree min2 = malloc(sizeof(tree));
+	while(liste->head!=NULL && liste->head->suivant!=NULL){
+		printf("%s\n","test1" );
+		min1=min_freq_liste(liste);
+		printf("%s\n","test2" );
+		delete_node_liste(liste,min1);
+		printf("%s\n","test3" );
+		min2=min_freq_liste(liste);
+		printf("%s\n","test4" );
+		delete_node_liste(liste,min2);
+		printf("%s\n","test5" );
+		fus=fusion(min1,min2);
+		printf("%c",fus->root->in->symbole);
+		printf("%d\n",fus->root->in->frequency);
+		printf("%s\n","test6" );
+		if(liste->head!=NULL){
+			addListe(liste,fus);
+		}
+		printf("%s\n","test6.1" );
+		nodeL tmp=liste->head;
+	while(tmp!=NULL){
+		printf("%c",tmp->val->root->in->symbole);
+		printf("%d\n",tmp->val->root->in->frequency);
+		tmp=tmp->suivant;
+	}
+		printf("%s\n","test7" );		
+	}
+	printf("%s\n","test7.9" );
+	ptree tmp2=fus;
+	printf("%s\n","test8" );
+	printf("%c",tmp2->root->in->symbole);
+	printf("%d\n",tmp2->root->in->frequency);
+	return fus;
+
+
+}
+
+char* codage(char c, pnode pn){
+	char* cl=(char*)malloc(sizeof(char)*50);
+	char* cr=(char*)malloc(sizeof(char)*50);
+	printf("testttt\n");
+	if(pn->in->symbole==c){
+		printf("testtttK\n");
+		return "";
+	}else{
+		printf("testtttK\n");
+		if(pn->right==NULL){
+			printf("testtttKKKK\n");
+			return "3";
+		}else{
+			printf("testtttLEFT\n");
+			cl="1";
+			printf("cl= %s\n",cl);
+			cl=strcat(cl,codage(c,pn->left));
+			printf("testtttRIGHT\n");
+			cr="0";
+			cr=strcat(cr,codage(c,pn->right));
+		}
+	}
+	printf("testttt1\n");
+	if (cl[strlen(cl)-1]=="3"){
+		return cr;
+	}else{
+		return cl;
+	}
+}
+
+char* compress(char* txt, ptree pt){
+	int i;
+	char* res="";
+	for(i=0;i<(int)strlen(txt);i++){
+		printf("testttt2\n");
+		res=strcat(res,codage(txt[i],pt->root));
+	}
+	printf("testttt\n");
+	return res;
+}
 
