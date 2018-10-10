@@ -278,7 +278,7 @@ char * codage(char c, pnode pn){
 	printf("testttt\n");
 	if(pn->in->symbole==c){
 		printf("testtttAAA\n");
-		strcpy(res,"8");
+		strcpy(res," ");
 		printf("%s\n",res);
 		return res;
 	}else{
@@ -310,12 +310,13 @@ char * codage(char c, pnode pn){
 
 char* compress(char* txt, ptree pt){
 	int i;
-	char *res=malloc(sizeof(char)*500);
+	char *res=malloc(sizeof(char)*50);
 	for(i=0;i<(int)strlen(txt);i++){
-		printf("testttt2\n");
-		strcpy(res,codage(txt[i],pt->root));
+		printf("testtttMMMMMMMMM\n");
+		char * tmp=codage(txt[i],pt->root);
+		res=strcat(res,tmp);
 	}
-	printf("testttt\n");
+	printf("testtttpoijnj\n");
 	return res;
 }
 
