@@ -50,7 +50,7 @@ int main(){
 	 printf("%s\n","///////" );
 	
 	li liste=createListe();
-	char* texte= "h     e lll o    ";
+	char* texte= "hello";
 	liste=symbole_frequency(texte);
 	nodeL tmp=liste->head;
 	while(tmp!=NULL){
@@ -84,8 +84,11 @@ int main(){
 		printf("%d\n",tmp->val->root->in->frequency);
 		tmp=tmp->suivant;
 	}
-	char* code=compress(texte,btree);
+	char* code=(char*)malloc(sizeof(char));
+	code=compress(texte,btree);
 	printf("%s\n",code);
+	char* uncode=uncompress(code,btree);
+	printf("%s\n",uncode);
 	
 
 	///////////////////////////////

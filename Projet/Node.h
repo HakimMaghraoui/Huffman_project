@@ -75,6 +75,7 @@ ptree big_tree(li liste);
 char *strrev(char *str);
 char* codage(char c, pnode pn);
 char* compress(char* txt, ptree pt);
+char* uncompress (char* txt, ptree pt);
 
 #endif
 

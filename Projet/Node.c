@@ -196,7 +196,7 @@ ptree fusion(ptree pt1, ptree pt2){//PF
 	pnode tmp_pn1=(*pt1).root;
 	pnode tmp_pn2=(*pt2).root;
 	int val_fusion=((*tmp_pn1).in->frequency)+((*tmp_pn2).in->frequency);
-	pinfo info_fusion=create_info(val_fusion,'\spadesuit');
+	pinfo info_fusion=create_info(val_fusion,'$');
 	pnode n_fusion=create_node(info_fusion);
 	add_left(&n_fusion,&tmp_pn1);
 	add_right(&n_fusion,&tmp_pn2);
@@ -334,7 +334,30 @@ char* compress(char* txt, ptree pt){
 	return res;
 }
 
-/*char* decompress(char* code, ptree pt){
-	
+char* uncompress (char* txt, ptree pt){
+	char* res=(char*)malloc(sizeof(char));
+	int i;
+	pnode tmp=pt->root;
+	printf("%s\n","poop" );
+	for(i=1;i<(int)strlen(txt);i++){
+		printf("%s\n","poopu" );
+		if(tmp->in->symbole!='$'){
+			printf("%s\n","lol" );
+			res=strcat(res,&(*tmp).in->symbole);
+			i++;
+			tmp=pt->root;
+		}else{
+			if(txt[i]=='0'){
+				printf("%s\n","poop1" );
+				tmp=tmp->right;
+			}
+			if(txt[i]=='1'){
+				printf("%s\n","poop2" );
+				tmp=tmp->left;
+			}
+		}
+	}
+	return res;
 
-}*/
+}
+
