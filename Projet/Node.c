@@ -269,44 +269,54 @@ ptree big_tree(li liste){//on prend les mini ensuite on les fusione on supprime 
 
 }
 
-char* codage(char c, pnode pn){
-	char* cl=(char*)malloc(sizeof(char)*50);
-	char* cr=(char*)malloc(sizeof(char)*50);
+
+
+char * codage(char c, pnode pn){
+	char cl[50];
+	char cr[50];
+	char *res=malloc(sizeof(char)*100);
 	printf("testttt\n");
 	if(pn->in->symbole==c){
-		printf("testtttK\n");
-		return "";
+		printf("testtttAAA\n");
+		strcpy(res," ");
+		printf("%s\n",res);
+		return res;
 	}else{
 		printf("testtttK\n");
-		if(pn->right==NULL){
+		if(pn->left==NULL){
 			printf("testtttKKKK\n");
-			return "3";
+			strcpy(res,"3");
+			printf("%s\n",res);
+			return res;
 		}else{
-			printf("testtttLEFT\n");
-			cl="1";
-			printf("cl= %s\n",cl);
-			cl=strcat(cl,codage(c,pn->left));
 			printf("testtttRIGHT\n");
-			cr="0";
-			cr=strcat(cr,codage(c,pn->right));
+			res=strcat(codage(c,pn->right),"0");
+			strcpy(cr,res);
+			printf("testtttLEFT\n");
+			res=strcat(codage(c,pn->left),"1");
+			strcpy(cl,res);
+			
 		}
 	}
 	printf("testttt1\n");
-	if (cl[strlen(cl)-1]=="3"){
-		return cr;
+	if (cl[0]=='3'){
+		strcpy(res,cr);
+		return res;
 	}else{
-		return cl;
+		strcpy(res,cl);
+		return res;
 	}
 }
 
 char* compress(char* txt, ptree pt){
 	int i;
-	char* res="";
+	char *res=malloc(sizeof(char)*100);
 	for(i=0;i<(int)strlen(txt);i++){
-		printf("testttt2\n");
-		res=strcat(res,codage(txt[i],pt->root));
+		printf("testtttMMMMMMMMM\n");
+		char * tmp=codage(txt[i],pt->root);
+		res=strcat(res,tmp);
 	}
-	printf("testttt\n");
+	printf("testtttpoijnj\n");
 	return res;
 }
 

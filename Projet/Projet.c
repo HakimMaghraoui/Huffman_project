@@ -50,7 +50,7 @@ int main(){
 	 printf("%s\n","///////" );
 	
 	li liste=createListe();
-	char* texte= "jnhihuyuyzkjh";
+	char* texte= "h     e lll o    ";
 	liste=symbole_frequency(texte);
 	nodeL tmp=liste->head;
 	while(tmp!=NULL){
