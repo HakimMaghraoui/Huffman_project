@@ -72,6 +72,7 @@ void delete_info(pinfo pin);
 void sort_liste(li liste);//fonction qui trie une liste d'arbrepar en fonction de leurs frequances
 ptree fusion(ptree pt1, ptree pt2);
 ptree big_tree(li liste);
+char *strrev(char *str);
 char* codage(char c, pnode pn);
 char* compress(char* txt, ptree pt);
 

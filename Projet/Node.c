@@ -269,12 +269,24 @@ ptree big_tree(li liste){//on prend les mini ensuite on les fusione on supprime 
 
 }
 
-
+char *strrev(char *str){
+    	int i = strlen(str)-1;
+	int j = 0;
+ 	char ch;
+	while (i > j){
+        	ch = str[i];
+		str[i] = str[j];
+	        str[j] = ch;
+        	i--;
+        	j++;
+    	}
+    	return str;
+}
 
 char * codage(char c, pnode pn){
-	char cl[50];
-	char cr[50];
-	char *res=malloc(sizeof(char)*100);
+	char *cl=(char*)malloc(sizeof(char));
+	char *cr=(char*)malloc(sizeof(char));
+	char *res=(char*)malloc(sizeof(char));
 	printf("testttt\n");
 	if(pn->in->symbole==c){
 		printf("testtttAAA\n");
@@ -310,13 +322,19 @@ char * codage(char c, pnode pn){
 
 char* compress(char* txt, ptree pt){
 	int i;
-	char *res=malloc(sizeof(char)*100);
+	char *res=(char*)malloc(sizeof(char));
 	for(i=0;i<(int)strlen(txt);i++){
 		printf("testtttMMMMMMMMM\n");
 		char * tmp=codage(txt[i],pt->root);
+		tmp=strcat(tmp,"0");
+		strrev(tmp);
 		res=strcat(res,tmp);
 	}
 	printf("testtttpoijnj\n");
 	return res;
 }
 
+/*char* decompress(char* code, ptree pt){
+	
+
+}*/
