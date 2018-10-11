@@ -2,19 +2,20 @@
 #include <string.h>
 
 
-void Show_node(pnode * pn){//PF
+void Show_node(pnode * pn){//PF//verrif
 	printf("voici la valeur du noeud: %d\n",(*pn)->in->frequency);
 	printf("sont fils droit: %d\n",((*pn)->right)->in->frequency);
 	printf("et sont fils gauche: %d\n",((*pn)->left)->in->frequency);
 }
-pinfo create_info(int f, char c){
+
+ pinfo create_info(int f, char c){//verrif
 	pinfo res=malloc(sizeof(struct info));
 	(*res).frequency=f;
 	(*res).symbole=c;
 	return res;
 }
 
-pnode create_node(pinfo in){//PF
+pnode create_node(pinfo in){//PF//verrif
 	pnode res=(pnode)malloc(sizeof(struct node));
 	(*res).in=in;
 	(*res).right=NULL;
@@ -22,7 +23,7 @@ pnode create_node(pinfo in){//PF
 	return res;
 }
 
-ptree create_tree(pnode pn){//PF
+ptree create_tree(pnode pn){//PF// verrif sans le frequancy
 	ptree res =malloc(sizeof(tree));
 	(*res).root=pn;
 	(*res).frequency=frequency(pn);
@@ -53,35 +54,25 @@ void addListe(li liste,ptree va){//Hakim
 	}
 }
 
-void add_right(pnode * pn1, pnode * pn2){//PF
+void add_right(pnode * pn1, pnode * pn2){//PF//verrif
 	(*pn1)->right=(*pn2);
 }
 
-void add_left(pnode * pn1, pnode * pn2){//PF
+void add_left(pnode * pn1, pnode * pn2){//PF//verrif
 	(*pn1)->left=(*pn2);
 }
 
 
-void delete_info(pinfo pin){//Hakim
+void delete_info(pinfo pin){//Hakim//verrif
 	(*pin).frequency=0;
 	(*pin).symbole='\0';
-	free(&pin);
+	free(pin);
 }
 
-// void delete_node(pnode * pn){//PF
-// 	if((*pn)->right!=NULL){
-// 	 	delete_node(&(*pn)->right);
-// 	 }
-// 	 if((*pn)->left!=NULL){
-// 	 	delete_node(&(*pn)->left);
-// 	 }
-// 	 (*pn)->right=NULL;
-// 	 (*pn)->left=NULL;
-// 	 delete_info((*pn).in);
-// 	 free(*pn);
+
 	
-// }
-void delete_node(pnode pn){//PF&Hakim
+
+void delete_node(pnode pn){//verif
 	if((*pn).right!=NULL){
 	 	delete_node((*pn).right);
 	 }
@@ -94,17 +85,6 @@ void delete_node(pnode pn){//PF&Hakim
 	 free(pn);
 	
 }
-
-// void delete_tree(pnode * pn){//parcourire pour tout suprimer et pas juste la racinepartire de la fin remonter en verifiant si on a des enfants sinon on supprime
-// 	if ((*pn)!=NULL){			//ici on pourrais simplement appeler delete_node sur la racine de l'arbre avec ducoup un arbre en poarametre
-// 		delete_tree(&(*pn)->right);
-// 		delete_tree(&(*pn)->left);
-		
-// 		(*pn)=NULL;
-// 		free(*pn);
-// 	}
-// }
-
 
 void delete_node_liste(li liste, ptree v){
 	nodeL tmp=liste->head;
@@ -126,13 +106,15 @@ void delete_node_liste(li liste, ptree v){
 	liste->taille--;
 }
 
-void delete_tree(ptree * pt){//PF
+void delete_tree(ptree * pt){//PF//entrain d'etre verifier//essayer sans le pointeur sur pointeur
 	if((*pt)->root!=NULL){
 		delete_node((*pt)->root);
 	}else{
 		printf("%s\n","arbre deja vide");
 	}
 }
+
+
 
 
 int frequency(pnode pt){//Hakim
@@ -234,36 +216,19 @@ ptree big_tree(li liste){//on prend les mini ensuite on les fusione on supprime 
 	ptree min1 =malloc(sizeof(tree));
 	ptree min2 = malloc(sizeof(tree));
 	while(liste->head!=NULL && liste->head->suivant!=NULL){
-		printf("%s\n","test1" );
 		min1=min_freq_liste(liste);
-		printf("%s\n","test2" );
 		delete_node_liste(liste,min1);
-		printf("%s\n","test3" );
 		min2=min_freq_liste(liste);
-		printf("%s\n","test4" );
 		delete_node_liste(liste,min2);
-		printf("%s\n","test5" );
 		fus=fusion(min1,min2);
-		printf("%c",fus->root->in->symbole);
-		printf("%d\n",fus->root->in->frequency);
-		printf("%s\n","test6" );
 		if(liste->head!=NULL){
 			addListe(liste,fus);
 		}
-		printf("%s\n","test6.1" );
 		nodeL tmp=liste->head;
 	while(tmp!=NULL){
-		printf("%c",tmp->val->root->in->symbole);
-		printf("%d\n",tmp->val->root->in->frequency);
 		tmp=tmp->suivant;
 	}
-		printf("%s\n","test7" );		
 	}
-	printf("%s\n","test7.9" );
-	ptree tmp2=fus;
-	printf("%s\n","test8" );
-	printf("%c",tmp2->root->in->symbole);
-	printf("%d\n",tmp2->root->in->frequency);
 	return fus;
 
 
@@ -287,30 +252,21 @@ char * codage(char c, pnode pn){
 	char *cl=(char*)malloc(sizeof(char));
 	char *cr=(char*)malloc(sizeof(char));
 	char *res=(char*)malloc(sizeof(char));
-	printf("testttt\n");
 	if(pn->in->symbole==c){
-		printf("testtttAAA\n");
 		strcpy(res," ");
-		printf("%s\n",res);
 		return res;
 	}else{
-		printf("testtttK\n");
 		if(pn->left==NULL){
-			printf("testtttKKKK\n");
 			strcpy(res,"3");
-			printf("%s\n",res);
 			return res;
 		}else{
-			printf("testtttRIGHT\n");
 			res=strcat(codage(c,pn->right),"0");
 			strcpy(cr,res);
-			printf("testtttLEFT\n");
 			res=strcat(codage(c,pn->left),"1");
 			strcpy(cl,res);
 			
 		}
 	}
-	printf("testttt1\n");
 	if (cl[0]=='3'){
 		strcpy(res,cr);
 		return res;
@@ -324,13 +280,11 @@ char* compress(char* txt, ptree pt){
 	int i;
 	char *res=(char*)malloc(sizeof(char));
 	for(i=0;i<(int)strlen(txt);i++){
-		printf("testtttMMMMMMMMM\n");
 		char * tmp=codage(txt[i],pt->root);
 		tmp=strcat(tmp,"0");
 		strrev(tmp);
 		res=strcat(res,tmp);
 	}
-	printf("testtttpoijnj\n");
 	return res;
 }
 
@@ -338,26 +292,48 @@ char* uncompress (char* txt, ptree pt){
 	char* res=(char*)malloc(sizeof(char));
 	int i;
 	pnode tmp=pt->root;
-	printf("%s\n","poop" );
 	for(i=1;i<(int)strlen(txt);i++){
-		printf("%s\n","poopu" );
 		if(tmp->in->symbole!='$'){
-			printf("%s\n","lol" );
 			res=strcat(res,&(*tmp).in->symbole);
-			i++;
 			tmp=pt->root;
+			i++;
 		}else{
 			if(txt[i]=='0'){
-				printf("%s\n","poop1" );
 				tmp=tmp->right;
 			}
 			if(txt[i]=='1'){
-				printf("%s\n","poop2" );
 				tmp=tmp->left;
 			}
 		}
 	}
 	return res;
+
+}
+
+char* file_to_char(char* nomf){
+	FILE* f;
+	f=fopen(nomf,"r");
+	char* txt=(char*)malloc(sizeof(char));
+	char* res=(char*)malloc(sizeof(char));
+	while(!feof(f)){
+		fread(txt,sizeof(char),1,f);
+		res=strcat(res,txt);
+	}
+	fclose(f);
+	
+	return res;
+}
+
+void write(char* txt, char* nomf){
+	FILE* f;
+	f=fopen(nomf,"w");
+	char* c=(char*)malloc(sizeof(char));
+	int i;
+	for(i=0;i<(int)strlen(txt);i++){
+		*c=txt[i];
+		fwrite(c,sizeof(char),1,f);
+	}
+	fclose(f);
 
 }
 

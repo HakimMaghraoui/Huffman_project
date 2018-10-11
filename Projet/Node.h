@@ -76,6 +76,8 @@ char *strrev(char *str);
 char* codage(char c, pnode pn);
 char* compress(char* txt, ptree pt);
 char* uncompress (char* txt, ptree pt);
+char* file_to_char(char* nomf);
+void write(char* txt, char* nomf);
 
 #endif
 
