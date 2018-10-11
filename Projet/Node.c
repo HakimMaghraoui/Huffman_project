@@ -115,6 +115,8 @@ void delete_tree(ptree * pt){//PF//entrain d'etre verifier//essayer sans le poin
 }
 
 
+
+
 int frequency(pnode pt){//Hakim
 	int left=0;
 	int right=0;
@@ -186,7 +188,6 @@ ptree fusion(ptree pt1, ptree pt2){//PF
 }
 
 ptree min_freq_liste(li liste){
-	
 	int min=liste->head->val->root->in->frequency;
 	nodeL tmp=liste->head;
 	ptree res=tmp->val;
@@ -200,7 +201,16 @@ ptree min_freq_liste(li liste){
 	return res;
 }
 
-ptree big_tree(li liste){
+// void sort_liste(li liste){
+// 	// int i,j;
+// 	// for(i=0,i<(int)liste->taille;i++){
+// 	// 	for()
+// 	// }
+
+
+// }
+
+ptree big_tree(li liste){//on prend les mini ensuite on les fusione on supprime de la liste les deux mini et on ajoute la fusiona la liste
 	
 	ptree fus =malloc(sizeof(tree));
 	ptree min1 =malloc(sizeof(tree));
@@ -232,12 +242,12 @@ ptree big_tree(li liste){
 		printf("%s\n","test7" );		
 	}
 	printf("%s\n","test7.9" );
-	
+	ptree tmp2=fus;
+	printf("%s\n","test8" );
+	printf("%c",tmp2->root->in->symbole);
+	printf("%d\n",tmp2->root->in->frequency);
+	return fus;
 
-	
-		
-		return fus;
-	
 
 }
 
@@ -262,7 +272,7 @@ char * codage(char c, pnode pn){
 	printf("testttt\n");
 	if(pn->in->symbole==c){
 		printf("testtttAAA\n");
-		strcpy(res,"");
+		strcpy(res," ");
 		printf("%s\n",res);
 		return res;
 	}else{
@@ -319,18 +329,17 @@ char* uncompress (char* txt, ptree pt){
 			i++;
 			tmp=pt->root;
 		}else{
-		if(txt[i]=='0'){
-			printf("%s\n","poop1" );
-			tmp=tmp->right;
-		}
-		if(txt[i]=='1'){
-			printf("%s\n","poop2" );
-			tmp=tmp->left;
+			if(txt[i]=='0'){
+				printf("%s\n","poop1" );
+				tmp=tmp->right;
+			}
+			if(txt[i]=='1'){
+				printf("%s\n","poop2" );
+				tmp=tmp->left;
+			}
 		}
 	}
-}
 	return res;
 
 }
-
 
