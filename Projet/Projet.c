@@ -34,11 +34,8 @@ int main(){
 			case 2:
 				printf("Veuillez entrer le nom du fichier.txt(no spaces):   ");
 				char* nomf=(char*)malloc(sizeof(char));
-				printf("V1");
 				scanf("%s",nomf);
-				printf("V2");
 				char* texte=file_to_char(nomf);
-				printf("V3");
 				li liste2= symbole_frequency(texte);
 				ptree bigtree2=big_tree(liste2);
 				char* code2= compress(texte,bigtree2);
@@ -46,7 +43,7 @@ int main(){
 				char* sortief=(char*)malloc(sizeof(char));
 				scanf("%s",sortief);
 				write(code2, sortief);
-				printf("\n");
+				printf("Votre texte est bien compresse dans votre fichier\n");
 				break;
 			case 3:
 				run=0;
